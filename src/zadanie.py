@@ -46,21 +46,20 @@ def printout(matrix):
         print(' '.join(row))
 
 
-def update_matrix(matrix, car):
-    if car.orientation == "h":
-        for i in range(car.size):
-            #reset
-            matrix[car.pos_y - 1][car.pos_x + i - 1] = "X"
-        for i in range(car.size):
-            #update
-            matrix[car.pos_y - 1][car.pos_x + i - 1] = car.name
-    else:
-        for i in range(car.size):
-            #reset
-            matrix[car.pos_y + i - 1][car.pos_x - 1] = "X"
-        for i in range(car.size):
-            #update
-            matrix[car.pos_y + i - 1][car.pos_x - 1] = car.name
+def update_matrix(matrix, cars):
+    # Clear the entire matrix
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            matrix[i][j] = "X"
+
+    # Update the matrix with the new car positions
+    for car in cars:
+        if car.orientation == "h":
+            for i in range(car.size):
+                matrix[car.pos_y - 1][car.pos_x + i - 1] = car.name
+        else:
+            for i in range(car.size):
+                matrix[car.pos_y + i - 1][car.pos_x - 1] = car.name
 
 
 c1 = Car("Red", 2, 2, 3, "h", "R")
@@ -78,7 +77,7 @@ rows = 6
 cols = 6
 matrix = [["X" for _ in range(cols)] for _ in range(rows)]
 for car in Cars:
-    update_matrix(matrix, car)
+    update_matrix(matrix, Cars)
 
 
 def input_handler():
@@ -100,25 +99,25 @@ def input_handler():
                                    "Press 'q' to QUIT : ")
                 if user_input == "w":
                     car.UP()
-                    update_matrix(matrix, car)
+                    update_matrix(matrix, Cars)
                     printout(matrix)
                     break
 
                 elif user_input == "s":
                     car.DOWN()
-                    update_matrix(matrix, car)
+                    update_matrix(matrix, Cars)
                     printout(matrix)
                     break
 
                 elif user_input == "a":
                     car.LEFT()
-                    update_matrix(matrix, car)
+                    update_matrix(matrix, Cars)
                     printout(matrix)
                     break
 
                 elif user_input == "d":
                     car.RIGHT()
-                    update_matrix(matrix, car)
+                    update_matrix(matrix, Cars)
                     printout(matrix)
                     break
 
