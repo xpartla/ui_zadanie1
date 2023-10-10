@@ -262,7 +262,7 @@ if solution_node:
         print(f"Step {i}:")
         output(node.state)
         #print(f"Action: {node.action}")
-        print("-" * 30)
+        print("_" * 50)
     print("Depth:", solution_node.depth)
     print("Path length: ", len(path))
     print("Number of states created:", state_counter)
